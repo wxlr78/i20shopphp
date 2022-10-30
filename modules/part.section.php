@@ -84,7 +84,7 @@ $year = strftime('%Y');
     <?php
     $content = mysqli_fetch_all($table);
     $html = "";
-    for ($i = $products_on_page * ($page - 1); $i <= $products_on_page * $page && $i < $products_count; $i++)
+    for ($i = $products_on_page * ($page - 1); $i < $products_on_page * $page && $i < $products_count; $i++)
     {
         $product_id = $content[$i][0];
         $main_section_id = $content[$i][1];
