@@ -1,28 +1,39 @@
 <?php
 
-$full_name = '';
-if (isset($_COOKIE['full_name'])) {
+if (isset($_COOKIE['full_name']))
+{
     $full_name = $_COOKIE['full_name'];
 }
-
-function is_full_name_error() {
-    if (isset($_COOKIE['full_name_error'])) {
-        return true;
-    }
-    return false;
+else
+{
+    $full_name = '';
 }
 
-$email = '';
-if (isset($_COOKIE['email'])) {
+if (isset($_COOKIE['email']))
+{
     $email = $_COOKIE['email'];
 }
-
-function is_email_error() {
-    if (isset($_COOKIE['email_error'])) {
-        return true;
-    }
-    return false;
+else
+{
+    $email = '';
 }
+
+$full_name_error_message = isset($_COOKIE['full_name_error']) ? '<p>Имя должно состоять из русских букв и пробелов.</p>Длина имени должна быть от 3 до 30 символов.</p>' : '';
+$full_name_error_class = isset($_COOKIE['full_name_error']) ? "class='error'" : '';
+
+$email_error_message = isset($_COOKIE['email_error']) ? '<p>Укажите почту в правильном формате.</p>Длина почты должна быть от 3 до 30 символов.</p>' : '';
+$email_error_class = isset($_COOKIE['email_error']) ? "class='error'" : '';
+
+$theme_error_message = isset($_COOKIE['theme_error']) ? '<p>Используйте только русские буквы и знаки препинания.</p>Длина вопроса должна быть от 1 до 30 символов.</p>' : '';
+$theme_error_class = isset($_COOKIE['theme_error']) ? "class='error'" : '';
+
+$core_error_message = isset($_COOKIE['core_error']) ? '<p>Используйте только русские буквы и знаки препинания.</p>Длина вопроса должна быть от 1 до 100 символов.</p>' : '';
+$core_error_class = isset($_COOKIE['core_error']) ? "class='error'" : '';
+
+$acquainted_error_message = isset($_COOKIE['acquainted_error']) ? '<p>Обязательно к ознакомлению.</p>' : '';
+$acquainted_error_class = isset($_COOKIE['acquainted_error']) ? "class='error'" : '';
+
+$success_message = isset($_COOKIE['success']) ? "<p class='success'>Форма успешно отправлена</p>" : '';
 
 function is_selected_year_of_birth($y) {
     if (isset($_COOKIE['year_of_birth'])) {
@@ -46,37 +57,6 @@ function is_checked_match_sex($s) {
     }
 }
 
-$theme = '';
-if (isset($_COOKIE['theme'])) {
-    $theme = $_COOKIE['theme'];
-}
-
-function is_theme_error() {
-    if (isset($_COOKIE['theme_error'])) {
-        return true;
-    }
-    return false;
-}
-
-$core = '';
-if (isset($_COOKIE['core'])) {
-    $email = $_COOKIE['core'];
-}
-
-function is_core_error() {
-    if (isset($_COOKIE['core_error'])) {
-        return true;
-    }
-    return false;
-}
-
-function is_acquainted_error() {
-    if (isset($_COOKIE['acquainted_error'])) {
-        return true;
-    }
-    return false;
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,13 +72,14 @@ function is_acquainted_error() {
 <div class="flex" id="container">
     <div class="flex" id="form">
         <form action="\modules\send.php" method="post" class="flex" id="content">
+            <label><a href="\products.php">Назад</a></label>
             <h1>Форма обратной связи</h1>
             <label class="title">Имя</label>
-            <input name="full_name" type="text" value="<?= $full_name ?>" <?php if (is_full_name_error()) echo "class='error'" ?>>
-            <?php if (is_full_name_error()) echo "<p>Имя должно состоять из русских букв и пробелов.</p>Длина имени должна быть от 3 до 30 символов.</p>" ?>
+            <input name="full_name" type="text" value="<?= $full_name ?>" <?= $full_name_error_class ?>>
+            <?= $full_name_error_message ?>
             <label class="title">E-mail</label>
-            <input name="email" type="text" value="<?= $email ?>" <?php if (is_email_error()) echo "class='error'" ?>>
-            <?php if (is_email_error()) echo "<p>Укажите почту в правильном формате.</p>Длина почты должна быть от 3 до 30 символов.</p>" ?>
+            <input name="email" type="text" value="<?= $email ?>" <?= $email_error_class ?>>
+            <?= $email_error_message ?>
             <label class="title">Год рождения</label>
             <select name="year_of_birth" size="1">
                 <option value="1998" <?= is_selected_year_of_birth('1998') ?>>1998</option>
@@ -115,16 +96,16 @@ function is_acquainted_error() {
                 <label for="sex">Женский</label>
             </div>
             <label class="title">Тема обращения</label>
-            <input name="theme" type="text" <?php if (is_theme_error()) echo "class='error'" ?>>
-            <?php if (is_theme_error()) echo "<p>Используйте только русские буквы, цифры и знаки препинания.</p>Длина темы должна быть от 1 до 30 символов.</p>" ?>
+            <input name="theme" type="text" <?= $theme_error_class ?>>
+            <?= $theme_error_message ?>
             <label class="title">Суть вопроса</label>
-            <textarea name="core" <?php if (is_core_error()) echo "class='error'" ?>></textarea>
-            <?php if (is_core_error()) echo "<p>Используйте только русские буквы, цифры и знаки препинания.</p>Длина вопроса должна быть от 1 до 100 символов.</p>" ?>
+            <textarea name="core" <?= $core_error_class ?>></textarea>
+            <?= $core_error_message ?>
             <div class="flex center">
                 <input name="acquainted" type="checkbox" id="acquainted">
-                <label for="acquainted" <?php if (is_acquainted_error()) echo "class='error'" ?>>С контрактом ознакомлен(а)</label>
+                <label for="acquainted" <?= $acquainted_error_class ?>>С контрактом ознакомлен(а)</label>
             </div>
-            <?php if (is_acquainted_error()) echo "<p>Необходимо подтвердить.</p>" ?>
+            <?= $acquainted_error_message ?>
             <input id="button" type="submit" value="Отправить">
             <?php if(isset($_COOKIE['success'])) echo "<p class='success'>Форма успешно отправлена</p>" ?>
         </form>
