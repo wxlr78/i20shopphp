@@ -1,0 +1,166 @@
+body {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    background-color: #ededed;
+}
+
+.error {
+    background-color: lightcoral;
+}
+
+.success {
+    background-color: lightgreen;
+}
+
+.flex {
+    display: flex;
+}
+
+.center {
+    align-items: center;
+}
+
+
+.column {
+    flex-direction: column;
+}
+
+#container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+
+    background-color: #ededed;
+}
+
+#form {
+    flex-direction: column;
+    align-items: center;
+
+    width: 600px;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    border-radius: 15px;
+
+    background: white;
+}
+
+#content {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 400px;
+    height: 100%;
+
+    padding: 60px 10px 60px 10px;
+}
+
+h1 {
+    margin: 0px;
+}
+
+.title {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    font-size: 15pt;
+    border: 1px lightgray solid;
+    border-radius: 2px;
+}
+
+input[type="text"] {
+    width: 392px;
+    height: 40px;
+
+    font-size: 20pt;
+    border: 1px lightgray solid;
+    border-radius: 2px;
+}
+
+select {
+    height: 44px;
+    width: 398px;
+    font-size: 15pt;
+}
+
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    margin-left: 0;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+#margin {
+    margin-right: 10px;
+}
+
+.flex label:nth-child(1) {
+    margin-right: 10px;
+}
+
+textarea {
+    height: 88px;
+    width: 398px;
+    font-size: 20pt;
+    resize: none;
+
+    margin-bottom: 20px;
+    font-family: 'Raleway', sans-serif;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    margin-right: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+#options {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    margin-top: 40px;
+    font-size: 11pt;
+}
+
+#checkboxLabel {
+    color: darkgray;
+    margin-right: 145px;
+}
+
+a {
+    color: gray;
+    text-decoration: none;
+}
+
+
+
+input[type="submit"] {
+    width: 170px;
+    height: 60px;
+    margin-top: 30px;
+
+    font-size: large;
+    font-weight: bold;
+
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 30px;
+
+    cursor: pointer;
+}

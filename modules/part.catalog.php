@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Каталог</title>
-    <link rel="stylesheet" href="styles\catalog.css">
-</head>
-<body>
-<div class="flex" id="container">
-    <div class="flex" id="bottom">
-        <?php
-        $html = "";
-        $sql = /** @lang text */
-            "select s.id as section_id, s.title as section_title, sum(product.is_active) as product_count
+<?php
+$sql = /** @lang text */
+    "select s.id as section_id, s.title as section_title, sum(product.is_active) as product_count
             from section as s
             inner join (
                 select section_id, product_id from section_product_main
@@ -22,24 +11,32 @@
             inner join product
             on section_product.product_id = product.id and product.is_active
             group by s.id order by product_count desc;";
-        $table = execute_sql_command($sql);
-        while ($row = mysqli_fetch_assoc($table))
-        {
-            $section_id = $row['section_id'];
-            $section_title = $row['section_title'];
-            $product_count = $row['product_count'];
-            $html .= /** @lang text */
-                "<div class='flex littlecard'>
+$html = "";
+foreach (get_query_result($connection, $sql) as $row) {
+    $html .= /** @lang text */
+        "<div class='flex littlecard'>
                 <div class='flex number' id='number3'>
-                    <h1>$product_count</h1>
+                    <h1>$row[product_count]</h1>
                 </div>
                 <div class='flex title'>
-                    <label><a href='/products.php?cat_id=$section_id'>$section_title</a></label>
+                    <label><a href='products.php?cat_id=$row[section_id]'>$row[section_title]</a></label>
                 </div>
             </div>";
-        }
-        echo $html;
-        ?>
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог</title>
+    <link rel="stylesheet" href="\styles\catalog.css">
+</head>
+<body>
+<div class="flex" id="container">
+    <div class="flex formlink"><a href="\modules\part.feedback.php">Форма обратной связи</a></div>
+    <div class="flex" id="bottom">
+        <?= $html ?>
     </div>
 </div>
 </body>

@@ -48,8 +48,17 @@
     height: 130px;
 }
 
+.product__preview__miniature img {
+    width: 100%;
+    height: auto;
+}
+
 .product__preview__full {
     width: 340px;
+}
+
+.product__preview__full img {
+    width: 100%;
 }
 
 .full_img {

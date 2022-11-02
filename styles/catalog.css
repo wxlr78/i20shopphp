@@ -18,6 +18,16 @@ body {
     background-color: white;
 }
 
+.formlink {
+    justify-content: center;
+    align-items: center;
+
+    min-width: 850px;
+    max-width: 850px;
+    min-height: 100px;
+    background-color: lightsteelblue;
+}
+
 #bottom {
     flex-direction: row;
     justify-content: flex-start;
