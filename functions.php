@@ -1,9 +1,10 @@
 <?php
 
-function insert_prepare_query($feedback, $full_name, $email, $year_of_birth, $sex, $theme, $core, $acquainted) {
+function insert_feedback_message($feedback, $full_name, $email, $year_of_birth, $sex, $theme, $core, $acquainted)
+{
     $sql = /** @lang text */
-        "INSERT INTO Messages (Full_name, Email, Year_of_birth, Sex, Theme, Core, Acquainted) 
-        VALUES (:full_name, :email, :year_of_birth, :sex, :theme, :core, :acquainted);";
+        "insert into messages (full_name, email, year_of_birth, sex, theme, core, acquainted) 
+        values (:full_name, :email, :year_of_birth, :sex, :theme, :core, :acquainted);";
     $query = $feedback->prepare($sql);
     $query->execute([
         'full_name'=>$full_name,
@@ -16,7 +17,8 @@ function insert_prepare_query($feedback, $full_name, $email, $year_of_birth, $se
     ]);
 }
 
-function get_prepare_query_result($connection, $sql, $id) {
+function get_prepare_query_result($connection, $sql, $id)
+{
     $query = $connection->prepare($sql);
     $query->execute(['id'=>$id]);
     $result = $query->fetchAll();
@@ -27,17 +29,14 @@ function get_prepare_query_result($connection, $sql, $id) {
     error_404();
 }
 
-function get_query_result($connection, $sql) {
+function get_query_result($connection, $sql)
+{
     $query = $connection->query($sql);
     return $query->fetchAll();
 }
 
 function create_connection($host, $dbname, $username, $password) {
     return new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-}
-
-function clear_int($input) {
-    return abs(intval(trim(strip_tags($input))));
 }
 
 function error_404() {

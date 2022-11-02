@@ -12,6 +12,10 @@ body {
     background-color: lightgreen;
 }
 
+.width {
+    width: 398px;
+}
+
 .flex {
     display: flex;
 }
